@@ -1,6 +1,5 @@
 let startTime = 0;
-
-let endTime = 0;
+let endTime = document.querySelector("video")?.duration || 100;
 
 
 async function init() {
@@ -106,6 +105,14 @@ function setupDraggableButtons(leftButton: HTMLButtonElement, rightButton: HTMLB
 init();
 
 const video = document.querySelector("video");
+
+video?.addEventListener("timeupdate", () => {
+  console.log("timeupdate", video?.currentTime);
+
+  if (video?.currentTime >= endTime) {
+    video.currentTime = startTime;
+  }
+});
 
 video?.addEventListener("loadeddata", () => {
   console.log("video loaded");
