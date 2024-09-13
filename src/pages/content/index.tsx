@@ -1,7 +1,6 @@
 let startTime = 0;
 let endTime = document.querySelector("video")?.duration || 100;
 
-
 async function init() {
   console.log("init");
   if (document.getElementById("repeat-container")) return;
@@ -48,7 +47,6 @@ function createRepeatContainer() {
   repeatContainer.style.bottom = "0";
   repeatContainer.style.width = "100%";
   repeatContainer.style.display = "flex";
-  repeatContainer.style.backgroundColor = "white";
   repeatContainer.style.padding = "10px";
   repeatContainer.style.boxShadow = "0 0 10px 0 rgba(0, 0, 0, 0.1)";
   return repeatContainer;
