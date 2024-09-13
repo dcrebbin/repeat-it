@@ -1,8 +1,13 @@
+let startTime = 0;
+
+let endTime = 0;
+
+
 async function init() {
   console.log("init");
-  if(document.getElementById("repeat-container")) return;
+  if (document.getElementById("repeat-container")) return;
   //wait until ytd-player is loaded
-  while(!document.getElementById("ytd-player")){
+  while (!document.getElementById("ytd-player")) {
     await new Promise(resolve => setTimeout(resolve, 100));
     console.log("waiting for ytd-player");
   }
@@ -28,9 +33,13 @@ function createRepeatButton(isLeft: boolean) {
   repeatButton.style.zIndex = "9999";
   repeatButton.style.boxShadow = "0 0 10px 0 rgba(0, 0, 0, 0.1)";
   repeatButton.style.position = "absolute";
+  repeatButton.style.color = "white";
+  repeatButton.innerHTML = isLeft ? ">" : "<";
   repeatButton.style.top = "50%";
+  repeatButton.style.transform = "translateY(-50%)";
   repeatButton.style.cursor = "move";
-  repeatButton.style.left = isLeft ? "50px" : "200px";
+  const screenWidth = window.innerWidth;
+  repeatButton.style.left = isLeft ? "0px" : `${screenWidth - 40}px`;
   return repeatButton;
 }
 
