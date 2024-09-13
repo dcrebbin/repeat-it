@@ -25,12 +25,12 @@ function createRepeatButton(isLeft: boolean) {
   repeatButton.style.backgroundColor = "black";
   repeatButton.style.padding = "10px";
   repeatButton.style.borderRadius = "5px";
+  repeatButton.style.zIndex = "9999";
   repeatButton.style.boxShadow = "0 0 10px 0 rgba(0, 0, 0, 0.1)";
   repeatButton.style.position = "absolute";
   repeatButton.style.top = "50%";
-  repeatButton.style.transform = `translateX(${isLeft ? "-100%" : "100%"})`;
   repeatButton.style.cursor = "move";
-
+  repeatButton.style.left = isLeft ? "50px" : "200px";
   return repeatButton;
 }
 
@@ -68,7 +68,8 @@ function setupDraggableButtons(leftButton: HTMLButtonElement, rightButton: HTMLB
 
     if (currentButton === leftButton) {
       const rightButtonX = parseInt(rightButton.style.left || "0");
-      newX = Math.min(newX, rightButtonX - 20); 
+      newX = Math.min(newX, rightButtonX - 20);
+    } else if (currentButton === rightButton) {
       const leftButtonX = parseInt(leftButton.style.left || "0");
       newX = Math.max(newX, leftButtonX + 20);
     }
