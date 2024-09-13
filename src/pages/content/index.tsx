@@ -6,7 +6,6 @@ let endTime = 0;
 async function init() {
   console.log("init");
   if (document.getElementById("repeat-container")) return;
-  //wait until ytd-player is loaded
   while (!document.getElementById("ytd-player")) {
     await new Promise(resolve => setTimeout(resolve, 100));
     console.log("waiting for ytd-player");
@@ -75,12 +74,19 @@ function setupDraggableButtons(leftButton: HTMLButtonElement, rightButton: HTMLB
     let newX = e.clientX - (containerRect?.left || 0);
     newX = Math.max(leftLimit, Math.min(newX, rightLimit));
 
+    const videoDuration = video?.duration || 0;
+
+
     if (currentButton === leftButton) {
       const rightButtonX = parseInt(rightButton.style.left || "0");
+      const newStartTime = videoDuration * (newX / rightLimit);
+      startTime = newStartTime;
       newX = Math.min(newX, rightButtonX - 20);
     } else if (currentButton === rightButton) {
       const leftButtonX = parseInt(leftButton.style.left || "0");
       newX = Math.max(newX, leftButtonX + 20);
+      const newEndTime = videoDuration * (newX / rightLimit);
+      endTime = newEndTime;
     }
 
     currentButton.style.left = `${newX}px`;
