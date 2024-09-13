@@ -1,0 +1,46 @@
+{
+  "manifest_version": 3,
+  "name": "Repeat It",
+  "description": "Repeat It allows for specific sections of Youtube videos to be repeated",
+  "version": "0.0.1",
+  "author": "Devon Crebbin",
+  "action": {
+    "default_popup": "src/pages/popup/index.html",
+    "default_icon": {
+      "32": "icon32.png"
+    }
+  },
+  "icons": {
+    "16": "icon16.png",
+    "32": "icon32.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  },
+  "permissions": [
+    "activeTab",
+    "storage"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.youtube.com/watch*"
+      ],
+      "js": [
+        "src/pages/content/index.tsx"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "icon128.png",
+        "icon48.png",
+        "icon32.png",
+        "icon16.png"
+      ],
+      "matches": [
+        "*://*.youtube.com/*"
+      ]
+    }
+  ]
+}
